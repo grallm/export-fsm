@@ -23,11 +23,19 @@
       I.push(fsmContent.nodes[transition.node].text);
 
     }else{
-      mu.push([
-        fsmContent.nodes[transition.nodeA].text,
-        transition.text, // Separate if multiple symbols
-        fsmContent.nodes[transition.nodeB].text,
-      ]);
+      // All symbols must be separated by ',', the comma can't be a symbol so
+      transition.text.split(/,\s?/).forEach(symbol => {
+        mu.push([
+          fsmContent.nodes[transition.nodeA].text,
+          symbol,
+          fsmContent.nodes[transition.nodeB].text,
+        ]);
+      })
     }
   });
+
+  console.log(Q);
+  console.log(I);
+  console.log(F);
+  console.log(mu);
 })()
