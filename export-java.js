@@ -41,14 +41,45 @@
     }
   });
 
-  console.log("Alphabet:");
-  console.log(A);
-  console.log("States:");
-  console.log(Q);
-  console.log("Initial States:");
-  console.log(I);
-  console.log("Final States:");
-  console.log(F);
-  console.log("Transitions:");
-  console.log(mu);
+  // Clear the space before in console
+  if(clear) clear();
+
+  // Java code string
+  let javaCode = "// Code exported from http://madebyevan.com/fsm/ with https://github.com/grallm/export-fsm\n"
+  + "// Alphabet\n"
+  + "Set<String> A = new HashSet<String>();\n";
+
+  // Alphabet
+  for(let symb in A){
+    javaCode += 'A.add("' + symb + '");\n';
+  }
+
+  // States
+  javaCode += "\n// States\nSet<Etat> Q = new HashSet<Etat>();\n";
+  for(let state in Q){
+    javaCode += 'Q.add(new Etat("' + state + '"));\n';
+  }
+
+  // Initial States
+  javaCode += "\n// Initial States\nSet<String> I = new HashSet<String>();\n";
+  for(let state in I){
+    javaCode += 'I.add("' + state + '");\n';
+  }
+
+  // Final States
+  javaCode += "\n// Final States\nSet<String> F = new HashSet<String>();\n";
+  for(let state in F){
+    javaCode += 'F.add("' + state + '");\n';
+  }
+
+  // Transitions
+  javaCode += "\n// Transitions\nSet<Transition> mu = new HashSet<Transition>();\n";
+  for(let trans of mu){
+    javaCode += 'mu.add(new Transition("'+ trans[0] +'","'+ trans[1] +'","'+ trans[2] +'"));\n';
+  }
+
+  // Constrct the FSM
+  javaCode += "\n// Constructor\nAutomate afn = new AFD(A, Q, I, F, mu);\n\n";
+
+  console.log(javaCode)
 })()

@@ -8,7 +8,7 @@ Symbols cannot contain `,`
 
 ### TODO
 - [X] Read the localStorage.fsm (and understand the JSON format)
-- [ ] Compose the Java code, log it in console
+- [X] Compose the Java code, log it in console
 - [ ] Make a minified file
 - [ ] Export directly a Java file
 - [ ] Chrome Extension : choose names ?
