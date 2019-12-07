@@ -1,6 +1,8 @@
 (() => {
   const fsmContent = JSON.parse(localStorage.fsm);
 
+  // Alphabet with all symbols
+  let A = [];
   // States are strings, their name
   let Q = []; // All states
   let I = []; // All initial states
@@ -25,6 +27,11 @@
     }else{
       // All symbols must be separated by ',', the comma can't be a symbol so
       transition.text.split(/,\s?/).forEach(symbol => {
+        // Add symbol to alphabet if doesn't exist
+        if(!A.includes(symbol)){
+          A.push(symbol);
+        }
+
         mu.push([
           fsmContent.nodes[transition.nodeA].text,
           symbol,
@@ -34,8 +41,14 @@
     }
   });
 
+  console.log("Alphabet:");
+  console.log(A);
+  console.log("States:");
   console.log(Q);
+  console.log("Initial States:");
   console.log(I);
+  console.log("Final States:");
   console.log(F);
+  console.log("Transitions:");
   console.log(mu);
 })()
