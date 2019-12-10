@@ -24,6 +24,21 @@
     if(transition.type === "StartLink"){
       I.push(fsmContent.nodes[transition.node].text);
 
+    }else if(transition.type === "SelfLink"){
+      // All symbols must be separated by ',', the comma can't be a symbol so
+      transition.text.split(/,\s?/).forEach(symbol => {
+        // Add symbol to alphabet if doesn't exist
+        if(!A.includes(symbol)){
+          A.push(symbol);
+        }
+
+        mu.push([
+          fsmContent.nodes[transition.node].text,
+          symbol,
+          fsmContent.nodes[transition.node].text,
+        ]);
+      })
+
     }else{
       // All symbols must be separated by ',', the comma can't be a symbol so
       transition.text.split(/,\s?/).forEach(symbol => {
@@ -50,25 +65,25 @@
   + "Set<String> A = new HashSet<String>();\n";
 
   // Alphabet
-  for(let symb in A){
+  for(let symb of A){
     javaCode += 'A.add("' + symb + '");\n';
   }
 
   // States
   javaCode += "\n// States\nSet<Etat> Q = new HashSet<Etat>();\n";
-  for(let state in Q){
+  for(let state of Q){
     javaCode += 'Q.add(new Etat("' + state + '"));\n';
   }
 
   // Initial States
   javaCode += "\n// Initial States\nSet<String> I = new HashSet<String>();\n";
-  for(let state in I){
+  for(let state of I){
     javaCode += 'I.add("' + state + '");\n';
   }
 
   // Final States
   javaCode += "\n// Final States\nSet<String> F = new HashSet<String>();\n";
-  for(let state in F){
+  for(let state of F){
     javaCode += 'F.add("' + state + '");\n';
   }
 
