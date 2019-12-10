@@ -79,7 +79,7 @@
   }
 
   // Constrct the FSM
-  javaCode += "\n// Constructor\nAutomate afn = new AFD(A, Q, I, F, mu);\n\n";
+  javaCode += "\n// Constructor\nAutomate afn = new AFN(A, Q, I, F, mu);\n\n";
 
   console.log(javaCode)
 })()
